@@ -1,0 +1,138 @@
+<mxfile host="app.diagrams.net" modified="2023-10-03T13:17:15.520Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.43" etag="tC6dtXXvZaejhMq6A_7V" version="22.0.2" type="device">
+  <diagram name="Page-1" id="JGiSM7UhXY6c7TMjBP4-">
+    <mxGraphModel dx="992" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-1" target="_ma7B7-ACBjiL-xoVMfT-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-1" value="เริ่มต้น" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="198" y="50" width="95" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-5" target="_ma7B7-ACBjiL-xoVMfT-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-5" value="รับเส้นทางการเดินของหุ่นยนต์จากผู้ใช้" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="128" y="120" width="234.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-7" target="_ma7B7-ACBjiL-xoVMfT-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-7" value="หุ่นยนต์เดินตามเส้นทางการเดิน" style="whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140.5" y="210" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-9" target="_ma7B7-ACBjiL-xoVMfT-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-9" value="หุ่ยนต์รดน้ำและใส่ปุ๋ยตามการวิเคราะห์โดยค่าจากเซนเซอร์" style="whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="370" y="500" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-12" target="_ma7B7-ACBjiL-xoVMfT-15">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="450" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-50" target="_ma7B7-ACBjiL-xoVMfT-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-12" value="หุ่นยนต์ถึงช่วงระยะที่ผู้ใช้ตั้งไว้" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="110.5" y="310" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-15" target="_ma7B7-ACBjiL-xoVMfT-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-15" value="หุ่นยนต์ตรวจสอบความชื้น&lt;br&gt;และแร่ธาตุในดิน" style="whiteSpace=wrap;html=1;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="370" y="420" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-17" value="ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="380.5" y="330" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-24" target="_ma7B7-ACBjiL-xoVMfT-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-24" value="จบเส้นทางการเดินทั้้งหมด" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="110.5" y="810" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-28" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-24">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="580" as="sourcePoint" />
+            <mxPoint x="350" y="240" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="660" y="860" />
+              <mxPoint x="660" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-30" value="ไม่ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="380" y="830" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-31" value="ไม่ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="245" y="420" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-32" value="ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="232.75" y="910" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-35" target="_ma7B7-ACBjiL-xoVMfT-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-35" value="หุ่นยนต์ตรวจสอบโรคพืช" style="whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="370" y="580" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-37" target="_ma7B7-ACBjiL-xoVMfT-39">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-37" value="พบโรคพืช" style="rhombus;whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="369.99" y="650" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-39" value="แจ้งเตือนผู้ใช้ผ่าน &lt;br&gt;Line notify" style="whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="510" y="710" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-41" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-52" target="_ma7B7-ACBjiL-xoVMfT-50">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460.00000000000364" y="780" as="sourcePoint" />
+            <mxPoint x="260" y="780" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-44" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-37" target="_ma7B7-ACBjiL-xoVMfT-52">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="720" as="sourcePoint" />
+            <mxPoint x="470" y="770" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-45" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-39" target="_ma7B7-ACBjiL-xoVMfT-52">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="780" as="sourcePoint" />
+            <mxPoint x="479.99999999999625" y="780" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="570" y="780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-47" value="จบ" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="197.75" y="960" width="95" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-51" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ma7B7-ACBjiL-xoVMfT-12" target="_ma7B7-ACBjiL-xoVMfT-50">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="246" y="410" as="sourcePoint" />
+            <mxPoint x="245" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-50" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="237.88" y="772.38" width="15.25" height="15.25" as="geometry" />
+        </mxCell>
+        <mxCell id="_ma7B7-ACBjiL-xoVMfT-52" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="442.37" y="772.38" width="15.25" height="15.25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

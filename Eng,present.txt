@@ -1,0 +1,14 @@
+Climate Change
+When we mentioned the climate change, everyone knows that it is one of significant problem nowadays. We are all trying to prevent the effects from that but it is still caused a lot. Climate change can lead to other problems but how is it involve to cocoa. Prolonged dry periods and flooding. the dry problem can cause plant dying from lacking of water and flooding is a great environment for virus growth and virus spreading. In addition, increasing mean temperatures, erratic precipitation, and disruption of seasonal patterns, all of these are able to cause cocoa diseases from suitable conditinos for virus outbreaks and they can damage to garden significantly. From widely virus spreading, gardener need to use a lot of labor to inspect all plants in garden and it is hard to detect them intensively. As a result, goods are lack of quality and gardener's income is decreased.
+
+Acoabot
+We do really care about this problem so we have developed Acoabot, the automated cocoa garden robot and real-time cocoa disease analysis using CNN
+
+The benefit is
+to reduce damage from plant disease outbreaks
+to reduce time and labor from gardener
+and to increase efficiency in crop management
+
+Operational result
+This is the result of training YoloV8 model. You can see AI label cover the product and confidence score above.
+This is web application for displaying farm view from robot's webcam, robot's GPS location, disease detection status. And gardener can choose mode between manual mode as in the image and automatic mode.
