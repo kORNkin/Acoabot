@@ -1,9 +1,8 @@
 //#include <util/atomic.h>
 #include <Wire.h>
-#include <Servo.h>
-#include <ESP32Servo.h>
-
 #define SLAVE_ADDRESS 0x08
+#include <ESP32Servo.h>
+#include <string>
 
 #define ENCA 19 // YELLOW
 #define ENCB 18 // WHITE
@@ -44,6 +43,9 @@ int bl_ofst = -5;
 
 //define servo starting position
 int start_angle = 90;
+
+String inputData;
+bool stringComplete = false;
 
 void setup() {
   Serial.begin(9600);
@@ -89,9 +91,6 @@ void setup() {
   // servo_fr.write(start_angle+fr_ofst);
   // servo_mr.write(start_angle+mr_ofst);
   servo_br.write(start_angle+br_ofst);
-  
-  //forward();
-  reverse();
 }
 
 char incomingByte;
@@ -111,12 +110,51 @@ void receiveData(int byteCount) {
         break;
 
       default:
+        stopMotor();
         break;
     }
   }
 }
 
+void sendData(){
+  char buffer[50];
+  Serial.println("Gu dai rub" + inputData);
+}
+
+void readControl(){
+    while(Serial.available()) {  
+      char inputChar = (char)Serial.read(); 
+      inputData += inputChar;
+      if(inputChar == '\n'){
+        stringComplete = true;
+      }
+
+    }
+}
+
 void loop() {
+  if(stringComplete){
+    if(inputData.startsWith("status")){
+      sendData();
+    }
+    else if(inputData.startsWith("w")){
+      forward();
+      Serial.println("Forward");
+    }else if(inputData.startsWith("s")){
+      reverse();
+      Serial.println("Backward");
+    }else if(inputData.startsWith("h")){
+      stopMotor();
+      Serial.println("Stop");
+    }
+  }
+
+  inputData = "";
+  stringComplete = false;
+
+  delay(10);
+
+  if(Serial.available() > 0) readControl();
 }
 
 void forward() {
