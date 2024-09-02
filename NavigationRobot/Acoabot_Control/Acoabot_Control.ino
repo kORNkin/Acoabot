@@ -4,42 +4,30 @@
 #include <ESP32Servo.h>
 #include <string>
 
-#define ENCA 19 // YELLOW
-#define ENCB 18 // WHITE
+#define ENCA_R 19 // YELLOW
+#define ENCB_R 18 // WHITE
 
-//#define ENCA_MR 19 // YELLOW
-//#define ENCB_MR 18 // WHITE
-#define PWM_MR 14
-#define IN1_MR 12
-#define IN2_MR 13
-
-//#define ENCA_BR 4 // YELLOW
-//#define ENCB_BR 2 // WHITE
-#define PWM_BR 25
-#define IN1_BR 26
-#define IN2_BR 27
-
-//#define ENCA_FR 19 // YELLOW
-//#define ENCB_FR 18 // WHITE
-#define PWM_FR 32
-#define IN1_FR 35
+#define PWM_FR 35
+#define IN1_FR 32
 #define IN2_FR 33
 
+#define PWM_MR 25
+#define IN1_MR 26
+#define IN2_MR 27
+
+#define PWM_BR 14
+#define IN1_BR 12
+#define IN2_BR 13
+
 //Define servos
-Servo servo_fl;
-Servo servo_ml;
-Servo servo_bl;
-Servo servo_fr;
-Servo servo_mr;
-Servo servo_br;
+Servo servo_FR;
+Servo servo_MR;
+Servo servo_BR;
 
 //define servo offset values
-int fr_ofst = 5; 
-int mr_ofst = 4;
-int br_ofst = -1;
-int fl_ofst = -9;
-int ml_ofst = 2;
-int bl_ofst = -5;
+int FR_ofst = 5; 
+int MR_ofst = 4;
+int BR_ofst = -1;
 
 //define servo starting position
 int start_angle = 90;
@@ -53,8 +41,8 @@ void setup() {
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
 
-  pinMode(ENCA,INPUT);
-  pinMode(ENCB,INPUT);
+  pinMode(ENCA_R,INPUT);
+  pinMode(ENCB_R,INPUT);
 
   // pinMode(ENCA_MR,INPUT);
   // pinMode(ENCB_MR,INPUT);
@@ -63,16 +51,10 @@ void setup() {
   pinMode(IN1_MR,OUTPUT);
   pinMode(IN2_MR,OUTPUT);
 
-  //pinMode(ENCA_BR,INPUT);
-  //pinMode(ENCB_BR,INPUT);
-  //attachInterrupt(digitalPinToInterrupt(ENCA),readEncoder,RISING);
   pinMode(PWM_BR,OUTPUT);
   pinMode(IN1_BR,OUTPUT);
   pinMode(IN2_BR,OUTPUT);
 
-  //pinMode(ENCA_FR,INPUT);
-  //pinMode(ENCB_FR,INPUT);
-  //attachInterrupt(digitalPinToInterrupt(ENCA),readEncoder,RISING);
   pinMode(PWM_FR,OUTPUT);
   pinMode(IN1_FR,OUTPUT);
   pinMode(IN2_FR,OUTPUT);
@@ -81,16 +63,16 @@ void setup() {
   // servo_fl.attach(31);
   // servo_ml.attach(33);
   // servo_bl.attach(32);
-  // servo_fr.attach(28);
-  // servo_mr.attach(29);
-  servo_br.attach(23);
+  // servo_FR.attach(28);
+  // servo_MR.attach(29);
+  servo_BR.attach(23);
 
   // servo_fl.write(start_angle+fl_ofst);
   // servo_ml.write(start_angle+ml_ofst);
   // servo_bl.write(start_angle+bl_ofst);
-  // servo_fr.write(start_angle+fr_ofst);
-  // servo_mr.write(start_angle+mr_ofst);
-  servo_br.write(start_angle+br_ofst);
+  // servo_FR.write(start_angle+FR_ofst);
+  // servo_MR.write(start_angle+MR_ofst);
+  servo_BR.write(start_angle+BR_ofst);
 }
 
 char incomingByte;
@@ -103,15 +85,15 @@ void receiveData(int byteCount) {
       case 'w':
         Serial.println("w");
         forward();
-        break;
+        BReak;
       case 's':
         Serial.println("s");
         reverse();
-        break;
+        BReak;
 
       default:
         stopMotor();
-        break;
+        BReak;
     }
   }
 }
@@ -191,9 +173,9 @@ void diagonalRight() {
   // servo_fl.write(120 + fl_ofst);
   // servo_ml.write(120 + ml_ofst);
   // servo_bl.write(120 + bl_ofst);
-  // servo_fr.write(120 + fr_ofst);
-  // servo_mr.write(120 + mr_ofst);
-  servo_br.write(120 + br_ofst);
+  // servo_FR.write(120 + FR_ofst);
+  // servo_MR.write(120 + MR_ofst);
+  servo_BR.write(120 + BR_ofst);
 
   delay(15);
 }
@@ -202,9 +184,9 @@ void diagonalLeft() {
   // servo_fl.write(60 + fl_ofst);
   // servo_ml.write(60 + ml_ofst);
   // servo_bl.write(60 + bl_ofst);
-  // servo_fr.write(60 + fr_ofst);
-  // servo_mr.write(60 + mr_ofst);
-  servo_br.write(60 + br_ofst);
+  // servo_FR.write(60 + FR_ofst);
+  // servo_MR.write(60 + MR_ofst);
+  servo_BR.write(60 + BR_ofst);
 
   delay(15);
 }
