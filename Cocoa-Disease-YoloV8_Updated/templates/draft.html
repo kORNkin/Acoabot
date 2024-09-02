@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACOABOT - Automated Cocoa Garden Robot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F0F4F3;
+        }
+        header {
+            background-color: #E8F5E9;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #3C4858;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .video-feed {
+            flex: 2;
+            margin-right: 20px;
+        }
+        .video-feed img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #3C4858;
+        }
+        .info-panel {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .info-panel p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #3C4858;
+        }
+        .control-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            margin-top: 30px;
+        }
+        .control-mode {
+            flex: 1;
+            text-align: center;
+        }
+        .control-mode button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #B3E5FC;
+            color: #3C4858;
+            margin: 10px 0;
+            display: block;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .control-mode button.active {
+            background-color: #64B5F6;
+            color: white;
+        }
+        .joystick-container {
+            flex: 2;
+            text-align: center;
+        }
+        .joystick {
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+            grid-template-rows: 100px 100px 100px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px; /* Adjust the gap to space out the buttons */
+            position: relative;
+        }
+        .joystick button {
+            background-color: #FFFFFF;
+            border: 2px solid #3C4858;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+        }
+        .joystick .up {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .joystick .left {
+            grid-column: 1;
+            grid-row: 2;
+        }
+        .joystick .right {
+            grid-column: 3;
+            grid-row: 2;
+        }
+        .joystick .down {
+            grid-column: 2;
+            grid-row: 3;
+        }
+        .direction-buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex: 1;
+            margin: 0 20px;
+            text-align: center;
+        }
+        .direction-buttons button {
+            background-color: #FFFFFF;
+            border: 2px solid #3C4858;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+        }
+        .direction-buttons .text {
+            font-size: 14px;
+            color: #3C4858;
+            margin-bottom: 5px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            width: auto\9; /* ie8 */
+        }
+    </style>
+</head>
+<body>
+    <header>ACOABOT</header>
+    <div class="content">
+        <div class="video-feed" style="max-width:600px;">
+            <h2>Farm View</h2>
+            <img src="{{ url_for('img') }}" alt="Farm View">
+        </div>
+        <div class="info-panel">
+            <h2>Information Panel</h2>
+            <p><strong>GPS:</strong> <span id="gps-coordinates">8.368097, 100.043839</span></p>
+            <p><strong>Amount of Infected plants:</strong> <span id="infected-count">5 plants</span></p>
+            <p><strong>Blackpod:</strong> <span id="blackpod-count">2 plants</span></p>
+            <p><strong>Frostypod:</strong> <span id="frostypod-count">1 plant</span></p>
+            <p><strong>Mirid:</strong> <span id="mirid-count">2 plants</span></p>
+        </div>
+    </div>
+
+    <div class="control-container">
+        <div class="control-mode">
+            <button id="manual-btn" class="active">Manual</button>
+            <button id="auto-btn">Auto</button>
+        </div>
+        <div class="direction-buttons">
+            <div>
+                <h4>Turn Left</h4>
+                <button onclick="move('turn-left')">⤿</button>
+            </div>
+            <div>
+                <h4>Turn Right</h4>
+                <button onclick="move('turn-right')">⤾</button>
+            </div>
+        </div>
+        <div class="joystick-container">
+            <div class="joystick">
+                <button class="up" onclick="move('up')">⬆️</button>
+                <button class="left" onclick="move('left')">⬅️</button>
+                <button class="right" onclick="move('right')">➡️</button>
+                <button class="down" onclick="move('down')">⬇️</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gpsCoordinates = document.getElementById('gps-coordinates');
+        const infectedCount = document.getElementById('infected-count');
+        const blackpodCount = document.getElementById('blackpod-count');
+        const frostypodCount = document.getElementById('frostypod-count');
+        const miridCount = document.getElementById('mirid-count');
+        const manualBtn = document.getElementById('manual-btn');
+        const autoBtn = document.getElementById('auto-btn');
+
+        function move(direction) {
+            fetch('/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ direction: direction })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        manualBtn.addEventListener('click', () => {
+            manualBtn.classList.add('active');
+            autoBtn.classList.remove('active');
+            fetch('/set_mode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mode: 'manual' })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        });
+
+        autoBtn.addEventListener('click', () => {
+            autoBtn.classList.add('active');
+            manualBtn.classList.remove('active');
+            fetch('/set_mode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mode: 'auto' })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        });
+
+        setInterval(() => {
+            fetch('/get_gps')
+                .then(response => response.json())
+                .then(data => gpsCoordinates.textContent = data.gps)
+                .catch(error => console.error('Error:', error));
+
+            fetch('/get_infected_data')
+                .then(response => response.json())
+                .then(data => {
+                    infectedCount.textContent = `${data.infected} plants`;
+                    blackpodCount.textContent = `${data.blackpod} plants`;
+                    frostypodCount.textContent = `${data.frostypod} plants`;
+                    miridCount.textContent = `${data.mirid} plants`;
+                })
+                .catch(error => console.error('Error:', error));
+        }, 1000);
+    </script>
+</body>
+</html>
