@@ -146,6 +146,30 @@
             margin-bottom: 5px;
         }
 
+        .stop-button {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex: 1;
+            margin: 0 20px;
+            text-align: center;
+        }
+        .stop-button button {
+            background-color: #FFFFFF;
+            border: 2px solid #3C4858;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+        }
+        .stop-button .text {
+            font-size: 14px;
+            color: #3C4858;
+            margin-bottom: 5px;
+        }
+
         /* Auto Mode Panel */
         .auto-panel {
             display: none;
@@ -183,7 +207,7 @@
     <div class="content">
         <div class="video-feed" style="max-width:600px;">
             <h2>Farm View</h2>
-            <img src="{{ url_for('img') }}" alt="Farm View">
+            <img src="{{ url_for('webcam') }}" alt="Farm View">
         </div>
         <div class="info-panel">
             <h2>Information Panel</h2>
@@ -204,19 +228,24 @@
             <div class="direction-buttons">
                 <div>
                     <h4>Turn Left</h4>
-                    <button onclick="move('turn-left')">⤿</button>
+                    <button onclick="sendCommand('q'); return false;">⤿</button>
                 </div>
                 <div>
                     <h4>Turn Right</h4>
-                    <button onclick="move('turn-right')">⤾</button>
+                    <button onclick="sendCommand('e'); return false;">⤾</button>
+                </div>
+            </div>
+            <div class="stop-button">
+                <div>
+                    <button onclick="sendCommand('h'); return false;">Stop</button>
                 </div>
             </div>
             <div class="joystick-container">
                 <div class="joystick">
-                    <button class="up" onclick="move('up')">⬆️</button>
-                    <button class="left" onclick="move('left')">⬅️</button>
-                    <button class="right" onclick="move('right')">➡️</button>
-                    <button class="down" onclick="move('down')">⬇️</button>
+                    <button class="up" onclick="sendCommand('w'); return false;">⬆️</button>
+                    <button class="left" onclick="sendCommand('u'); return false;">⬅️</button>
+                    <button class="right" onclick="sendCommand('o'); return false;">➡️</button>
+                    <button class="down" onclick="sendCommand('s'); return false;">⬇️</button>
                 </div>
             </div>
         </div>
@@ -242,18 +271,13 @@
         const homePositionInput = document.getElementById('home-position');
         const newWaypointInput = document.getElementById('new-waypoint');
         const waypointList = document.getElementById('waypoint-list');
+        
+        
 
-        function move(direction) {
-            fetch('/move', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ direction: direction })
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
+        function sendCommand(command) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/send_command/' + command, true);
+            xhr.send();
         }
 
         manualBtn.addEventListener('click', () => {
