@@ -19,6 +19,9 @@
 #define IN1_BL 12
 #define IN2_BL 13
 
+const int relayPin = 17;
+bool light = 0;
+
 //Define servos
 Servo servo_FL;
 Servo servo_ML;
@@ -46,6 +49,10 @@ void setup() {
 
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
+
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, LOW);  
+  light = 0;
 
   pinMode(ENCA_L,INPUT);
   pinMode(ENCB_L,INPUT);
@@ -143,6 +150,16 @@ void loop() {
     }else if(inputData.startsWith("q")){
       stopMotor();
       Serial.println("Stop");
+    }
+    else if(inputData.startsWith("f")){
+      if(light){
+        digitalWrite(relayPin, LOW);
+        Serial.println("No Flash");
+      }else {
+        digitalWrite(relayPin, HIGH);
+        Serial.println("Flash!");
+      } 
+      light = !light;
     }else if(inputData.startsWith("FF")){
       setMotor(-1, 255, PWM_FL, IN1_FL, IN2_FL);
     }else if(inputData.startsWith("MM")){
