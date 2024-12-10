@@ -1,0 +1,26 @@
+Robot
+
+- structure 
+	- stronger base 
+	- base's cover
+- ESP32 -> Mega
+- gimbal of camera
+
+
+Software
+
+- AI
+	- clean dataset
+	- re-train 
+- Web application
+	- improve UI
+	- connection flow
+	
+
+IMPORTANCE
+
+- Real use case
+- Strong robot structure
+- Web application connection
+- Camera control
+- Reasonable AI result 

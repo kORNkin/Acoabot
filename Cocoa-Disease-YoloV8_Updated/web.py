@@ -1,10 +1,21 @@
 from flask import Flask, Response, render_template, jsonify, request
-#from video_dectect import vid_detection, img_detection
+from video_dectect import vid_detection, img_detection
 import cv2
 from test import vid_detection, img_detection, webcam_detection
+import smbus
+import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'kornkin'
+
+# Raspberry Pi 4's I2C bus number
+ser = serial.Serial ("/dev/ttyUSB0", 9600)
+time.sleep(3)
+ser.reset_input_buffer()
+
+# Function to send command to Arduino
+def send_data(data):
+    ser.write(bytes(data + '\n', encoding='utf-8'))
 
 def generate_webcam():
     yolo_out = webcam_detection()
@@ -90,4 +101,4 @@ def set_mode():
     return jsonify({'status': 'success'})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=7000, debug=True)

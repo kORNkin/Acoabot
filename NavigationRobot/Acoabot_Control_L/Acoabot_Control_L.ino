@@ -19,7 +19,7 @@
 #define IN1_BL 12
 #define IN2_BL 13
 
-const int relayPin = 17;
+#define relayPin 17
 bool light = 0;
 
 //Define servos
@@ -51,7 +51,7 @@ void setup() {
   Wire.onReceive(receiveData);
 
   pinMode(relayPin, OUTPUT);
-  digitalWrite(relayPin, LOW);  
+  digitalWrite(relayPin, 1);  
   light = 0;
 
   pinMode(ENCA_L,INPUT);
@@ -144,19 +144,27 @@ void loop() {
     }else if(inputData.startsWith("l")){
       right();
       Serial.println("Right");
-    }else if(inputData.startsWith("k")){
+    }else if(inputData.startsWi3th("k")){
       straight();
       Serial.println("Straight");
     }else if(inputData.startsWith("q")){
       stopMotor();
       Serial.println("Stop");
     }
+    else if(inputData.startsWith("z")){
+      rotateright()
+      Serial.println("RR");
+    }
+    else if(inputData.startsWith("x")){
+      rotateleft()
+      Serial.println("RL");
+    }
     else if(inputData.startsWith("f")){
       if(light){
-        digitalWrite(relayPin, LOW);
+        digitalWrite(relayPin, 0);
         Serial.println("No Flash");
       }else {
-        digitalWrite(relayPin, HIGH);
+        digitalWrite(relayPin, 1);
         Serial.println("Flash!");
       } 
       light = !light;

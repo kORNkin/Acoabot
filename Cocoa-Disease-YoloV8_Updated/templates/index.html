@@ -10,15 +10,19 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #F0F4F3;
+            background-color: #e8faf0;
         }
         header {
-            background-color: #E8F5E9;
-            padding: 20px;
+            background: rgb(31,26,26);
+            background: linear-gradient(90deg, rgba(31,26,26,1) 0%, rgba(49,39,40,1) 30%, rgba(49,39,40,1) 50%, rgba(49,39,40,1) 70%, rgba(31,26,26,1) 100%);
+            padding: 5px;
             text-align: center;
             font-size: 24px;
             font-weight: bold;
             color: #3C4858;
+        }
+        header img {
+            width: 150px ;
         }
         img {
             max-width: 100%;
@@ -28,7 +32,8 @@
 
         .content {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
             padding: 20px;
         }
         .video-feed {
@@ -36,11 +41,15 @@
             margin-right: 20px;
         }
         .video-feed img {
-            width: 100%;
+            object-fit: contain;
             border-radius: 10px;
+
             border: 2px solid #3C4858;
+            
         }
         .info-panel {
+            display: flex;
+            justify-content: space-evenly;
             flex: 1;
             background-color: white;
             padding: 20px;
@@ -49,14 +58,24 @@
         }
         .info-panel p {
             margin: 10px 0;
-            font-size: 18px;
+            font-size: 30px;
             color: #3C4858;
         }
+
+        /* Setting */
+        .setting {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 20px;
+            margin-top: 30px;
+        }   
 
         /* Control Panel Styling */
         .control-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
             padding: 0 20px;
             margin-top: 30px;
@@ -69,7 +88,7 @@
             padding: 10px 20px;
             border-radius: 20px;
             border: none;
-            font-size: 16px;
+            font-size: 30px;
             cursor: pointer;
             background-color: #B3E5FC;
             color: #3C4858;
@@ -82,6 +101,7 @@
         .control-mode button.active {
             background-color: #64B5F6;
             color: white;
+            text-shadow: 2px 2px #000000;
         }
         .joystick-container {
             flex: 2;
@@ -98,7 +118,7 @@
         }
         .joystick button {
             background-color: #FFFFFF;
-            border: 2px solid #3C4858;
+            border: 4px solid #3C4858;
             padding: 15px;
             border-radius: 50%;
             font-size: 30px;
@@ -132,7 +152,7 @@
         }
         .direction-buttons button {
             background-color: #FFFFFF;
-            border: 2px solid #3C4858;
+            border: 4px solid #3C4858;
             padding: 15px;
             border-radius: 50%;
             font-size: 30px;
@@ -156,7 +176,7 @@
         }
         .stop-button button {
             background-color: #FFFFFF;
-            border: 2px solid #3C4858;
+            border: 4px solid #3C4858;
             padding: 15px;
             border-radius: 50%;
             font-size: 30px;
@@ -180,7 +200,7 @@
         }
         .flash-button button {
             background-color: #FFFFFF;
-            border: 2px solid #3C4858;
+            border: 4px solid #3C4858;
             padding: 15px;
             border-radius: 50%;
             font-size: 30px;
@@ -200,22 +220,101 @@
             flex-direction: column;
             flex: 2;
             text-align: left;
+            font-size: 20px;
         }
-        .auto-panel h4 {
+        .auto-panel h2 {
             margin-bottom: 10px;
         }
         .auto-panel input {
-            width: 100%;
-            padding: 10px;
+            width: 1000px;
+            padding: 40px;
             margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #3C4858;
+            border-radius: 10px;
+            border: 0px solid #3C4858;
+            font-size: 25px;
         }
         .auto-panel .input-positions {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+        
+        .home-input button {
+            padding: 20px 5px;
+            border-radius: 20px;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #24b4fb;
+            color: #fff;
+            margin: 10px 0;
+            display: block;
+            width: 250px;
+            height: 80px;
+            /* margin-left: auto; */
+            /* margin-right: auto; */
+            font-weight: 600;
+        }
+        .home-input button:hover {
+            background-color: #0071e2;
+        }
+
+        .home-input-btn {
+            display: flex;
+            justify-content: flex-start;
+            gap: 30px;
+        }
+        .ml16 {
+            color: #22b027;
+            font-weight: 800;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            /* letter-spacing: 0.5em; */
+            overflow: hidden;
+            opacity: 0%;
+        }
+
+        .ml16 .letter {
+            display: inline-block;
+            line-height: 1em;
+        }
+
+        .waypoint button.add-button {
+            margin-left: auto;
+            margin-right: auto; 
+            border: 2px solid #24b4fb;
+            background-color: #24b4fb;
+            border-radius: 0.9em;
+            cursor: pointer;
+            padding: 0.8em 1.2em 0.8em 1em;
+            transition: all ease-in-out 0.2s;
+            font-size: 20px;
+        }
+
+        .waypoint button.add-button span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: 600;
+        }
+        .waypoint button.add-button:hover {
+            background-color: #0071e2;
+        }
+
+        .waypoint button.remove-button {
+            border: 2px solid #ffcfca;
+            background-color: #ffcfca;
+            border-radius: 0.9em;
+            cursor: pointer;
+            padding: 0.8em 1.2em 0.8em 1em;
+            transition: all ease-in-out 0.2s;
+            font-size: 20px;
+        }
+        .waypoint button.remove-button:hover {
+            background-color: #f17f72;
+        }
+
         .waypoint-list {
             margin-top: 10px;
             max-height: 150px;
@@ -227,36 +326,53 @@
     </style>
 </head>
 <body>
-    <header>ACOABOT</header>
+    <header><img src="{{url_for('static', filename='logo.png')}}" alt="Acoabot"></header>
     <div class="content">
         <div class="video-feed" style="max-width:600px;">
             <h2>Farm View</h2>
-            <img src="{{ url_for('webcam') }}" alt="Farm View">
+            <img src="{{ url_for('video') }}" alt="Farm View">
         </div>
         <div class="info-panel">
-            <h2>Information Panel</h2>
-            <p><strong>GPS:</strong> <span id="gps-coordinates">8.368097, 100.043839</span></p>
-            <p><strong>Amount of Infected plants:</strong> <span id="infected-count">5 plants</span></p>
-            <p><strong>Blackpod:</strong> <span id="blackpod-count">2 plants</span></p>
-            <p><strong>Frostypod:</strong> <span id="frostypod-count">1 plant</span></p>
-            <p><strong>Mirid:</strong> <span id="mirid-count">2 plants</span></p>
+            <div class="gps">
+                <p><strong>GPS:</strong> <span id="gps-coordinates">8.368097, 100.043839</span></p>
+            </div>
+            <div class="disease-status">
+                <p><strong>Amount of Infected plants:</strong> <span id="infected-count">5 plants</span></p>
+                <p><strong>Blackpod:</strong> <span id="blackpod-count">2 plants</span></p>
+                <p><strong>Frostypod:</strong> <span id="frostypod-count">1 plant</span></p>
+                <p><strong>Mirid:</strong> <span id="mirid-count">2 plants</span></p>
+            </div>
         </div>
     </div>
-
-    <div class="control-container">
+    <div class="setting">
         <div class="control-mode">
-            <button id="manual-btn" class="active">Manual</button>
-            <button id="auto-btn">Auto</button>
+            <button id="auto-btn" class="active">Auto</button>
+            <button id="manual-btn">Manual</button>
         </div>
-        <div id="manual-controls" style="display: flex; width: 100%;">
+        <div class="flash-button">
+            <div>
+                <button onclick="sendCommand('f'); return false;"><img src="{{url_for('static', filename='light.png')}}" alt="light"></button>
+            </div>
+        </div>
+    </div>
+    <div class="control-container">
+        <div id="manual-controls" style="display: none; width: 100%;">
+            <div class="joystick-container">
+                <div class="joystick">
+                    <button class="up" onclick="sendCommand('w'); return false;"><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
+                    <button class="left" onclick="sendCommand('u'); return false;"><img src="{{url_for('static', filename='left.png')}}" alt="left"></button>
+                    <button class="right" onclick="sendCommand('o'); return false;"><img src="{{url_for('static', filename='right.png')}}" alt="right"></button>
+                    <button class="down" onclick="sendCommand('s'); return false;"><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
+                </div>
+            </div> 
             <div class="direction-buttons">
                 <div>
-                    <h4>Turn Left</h4>
-                    <button onclick="sendCommand('q'); return false;">⤿</button>
+                    <h3>Turn Left</h3>
+                    <button onclick="sendCommand('q'); return false;"><img src="{{url_for('static', filename='turn-left.png')}}" alt="turn-left" style="width:50px;"></button>
                 </div>
                 <div>
-                    <h4>Turn Right</h4>
-                    <button onclick="sendCommand('e'); return false;">⤾</button>
+                    <h3>Turn Right</h3>
+                    <button onclick="sendCommand('e'); return false;"><img src="{{url_for('static', filename='turn-right.png')}}" alt="turn-right" style="width:50px;"></button>
                 </div>
             </div>
             <div class="stop-button">
@@ -264,26 +380,42 @@
                     <button onclick="sendCommand('h'); return false;">Stop</button>
                 </div>
             </div>
-            <div class="flash-button">
-                <div>
-                    <button onclick="sendCommand('f'); return false;">Flash</button>
-                </div>
-            </div>
-            <div class="joystick-container">
-                <div class="joystick">
-                    <button class="up" onclick="sendCommand('w'); return false;">⬆️</button>
-                    <button class="left" onclick="sendCommand('u'); return false;">⬅️</button>
-                    <button class="right" onclick="sendCommand('o'); return false;">➡️</button>
-                    <button class="down" onclick="sendCommand('s'); return false;">⬇️</button>
-                </div>
+            
+            
             </div>
         </div>
-        <div id="auto-controls" class="auto-panel">
-            <h4>Home: <input type="text" id="home-position" placeholder="8.36, 100.04"></h4>
-            <h4>New Waypoint:</h4>
+        <div id="auto-controls" class="auto-panel" style="display: flex;">
+            <div class="home-input">
+                <h2>Home:</h2>
+                 <input class="input" id="home-position" placeholder="Starting point Ex. 8.368097, 100.043839" required="" type="text">
+               
+
+                <div class="home-input-btn">
+                    <button id="submit-btn" onclick="submitHome()">Submit</button>
+                    <h1 class="ml16">✔</h1>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+                </div>
+            </div>
+            <h2>Waypoint:</h2>
             <input type="text" id="new-waypoint" placeholder="Enter a new waypoint">
-            <button onclick="addWaypoint()">Add Waypoint</button>
-            <div class="waypoint-list" id="waypoint-list"></div>
+            <div class="waypoint">
+                <button class="add-button"onclick="addWaypoint()">
+                    <span>
+                        <svg
+                        height="30"
+                        width="30"
+                        viewBox="0 0 30 30"
+                        xmlns="http://www.w3.org/2000/svg"
+                        >
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
+                    </svg>
+                        Add Waypoint
+                    </span>
+                </button>
+                <button class="remove-button" onclick="removeWaypoint()" style="width: 80px;"> <img src="{{url_for('static', filename='remove.png')}}" alt="remove"> </button>
+            </div>
+            <div class="waypoint-list" id="waypoint-list" style="font-size: 30px;"></div>
         </div>
     </div>
 
@@ -371,16 +503,64 @@
             autoControls.style.display = 'flex';
         });
 
+        //Submit change color
+        autoBtn.addEventListener('click', () => {
+            autoBtn.classList.add('active');
+            manualBtn.classList.remove('active');
+            manualControls.style.display = 'none';
+            autoControls.style.display = 'flex';
+        });
+
+        //Submit home to server
+        function submitHome() {
+            const homePosition = homePositionInput.value;
+            if (homePosition){
+                var textWrapper = document.querySelector('.ml16');
+                textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+                anime.timeline({loop: false})
+                .add({
+                    targets: '.ml16',
+                    opacity: 1,
+                }).add({
+                    targets: '.ml16 .letter',
+                    translateY: [-100,0],
+                    easing: "easeOutExpo",
+                    duration: 1300,
+                    delay: (el, i) => 30 * i
+                }).add({
+                    targets: '.ml16',
+                    opacity: 0,
+                    duration: 1000,
+                    easing: "easeOutExpo",
+                });
+                
+                //code set home point here
+            }
+        }
+
         // Function to add new waypoint
         function addWaypoint() {
             const newWaypoint = newWaypointInput.value;
             if (newWaypoint) {
                 const listItem = document.createElement('p');
-                listItem.textContent = newWaypoint;
+                listItem.textContent = waypointList.childElementCount + 1
+                listItem.textContent += ". " + newWaypoint;
                 waypointList.appendChild(listItem);
-                newWaypointInput.value = '';  // Clear the input after adding
+                newWaypointInput.value = '';  
+                
+                //code add waypoint to server here
             }
         }
+        //Remove waypoint
+        function removeWaypoint() {
+            if(waypointList.lastChild){
+                waypointList.removeChild(waypointList.lastChild);
+
+                //code remove last waypoint to server here
+            }
+        }
+        
+            
     </script>
 </body>
 </html>

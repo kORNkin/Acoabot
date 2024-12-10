@@ -1,4 +1,4 @@
-#include <ESP32Servo.h>
+#include <Servo.h>
 
 Servo servo;
 
@@ -8,7 +8,7 @@ bool ch = false;
 void setup() {
   Serial.begin(9600);
 
-  servo.attach(23);
+  servo.attach(10);
 
   //servo.write(90);
 }

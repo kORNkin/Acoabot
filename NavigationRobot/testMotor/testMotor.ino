@@ -1,9 +1,9 @@
-#define ENCA_R 19 // YELLOW
-#define ENCB_R 18 // WHITE
+#define ENCA_R 93 // YELLOW
+#define ENCB_R 92 // WHITE
 
-#define PWM_BL 14
-#define IN1_BL 12
-#define IN2_BL 13
+#define PWM_BL 2
+#define IN1_BL 22
+#define IN2_BL 24
 
 void setup() {
   Serial.begin(9600);

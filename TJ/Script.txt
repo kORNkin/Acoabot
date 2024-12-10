@@ -1,0 +1,49 @@
+(1) Sawasdee krub! We are from Princess Chulabhorn Science High School Nakon Si Thammarat. Today we proud to present "Acoabot", an automated cocoa garden robot and real-time cocoa disease analysis using CNN. My name is Supphakon Yimi.
+.
+.
+.
+(2) Next step, we do search cocoa disease dataset for training AI model
+
+	The dataset we used 
+
+(3) is Cocoa Disease Detection Computer Vision Project from Roboflow. There are 4 classes, including Healthy, Mirid, Blackpod, and Frostypod. As you see, frostypod had less amount of data compared to others.
+
+	so we use algorithm called
+
+(4) Data Augmentation to increase the amount of data to balance it with other classes.
+
+	After getting data.
+
+(5) we trained AI Model. The model we used is YoloV8 from Ultralytics.
+
+	Then, turn to the robot part
+
+(6) we design and assembly the robot
+
+	And this is
+
+(7) the overview of Acoabot, pointing at each component.
+
+	After we built the robot
+
+(8) We program the robot controller with Arduino IDE. And the final step, we evaluate robot performance
+
+	OK! Let's talk about our operational results.
+
+(9) The first one is results of training AI model 
+	
+	And This is 
+
+(10) Real use case of cocoa disease detection at Tawatchai Farm
+	
+	The second one is
+
+(11) Web application connected to the robot and display farm view, Robot GPS location, and Disease Detection status. Gardener can control Acoabot via this platform with 2 modes the first mode is manual mode, gardener can freely control the robot's direction
+
+	The second mode is 
+
+(12) Automatic mode, with setting GPS location point, gardeners can create their own Acoabot's path for their garden, so this is really flexible for any garden.
+
+	And	
+
+(13) I'll show you the testing video of Acoat. It show case of Web application and Acoabot's movement.
