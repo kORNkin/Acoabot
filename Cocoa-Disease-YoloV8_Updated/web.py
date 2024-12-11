@@ -1,21 +1,56 @@
 from flask import Flask, Response, render_template, jsonify, request
-from video_dectect import vid_detection, img_detection
+from video_dectect import vid_detection, img_detection, pc_detection
 import cv2
 from test import vid_detection, img_detection, webcam_detection
 import smbus
+import serial
 import time
+import os
+
+import socket
+import sys
+import pickle
+import numpy as np
+import struct 
+import zlib
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'kornkin'
 
 # Raspberry Pi 4's I2C bus number
-ser = serial.Serial ("/dev/ttyUSB0", 9600)
-time.sleep(3)
-ser.reset_input_buffer()
+
+if os.path.exists("/dev/ttyUSB0"):
+    ser = serial.Serial ("/dev/ttyUSB0", 9600)
+    print("USB0 connect!")
+else: 
+    ser = serial.Serial ("/dev/ttyUSB1", 9600)
+    print("USB1 connect!")
+
+#time.sleep(3)
+#ser.reset_input_buffer()
 
 # Function to send command to Arduino
 def send_data(data):
     ser.write(bytes(data + '\n', encoding='utf-8'))
+    
+@app.route('/send_command/<command>')
+def handle_command(command):
+    send_data(command)  # Corrected function name
+    return f"Command '{command}' sent to Arduino."
+    
+def generate_pc_detection():
+    yolo_out = pc_detection()
+    for detection_ in yolo_out:
+        ret, buffer = cv2.imencode('.jpg', detection_)
+
+        frame = buffer.tobytes()
+        yield (b'--frame\r\n'
+                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_pc_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 def generate_webcam():
     yolo_out = webcam_detection()

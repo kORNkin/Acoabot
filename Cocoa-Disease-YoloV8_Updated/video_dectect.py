@@ -2,15 +2,18 @@ import cv2
 import torch
 import numpy as np
 import math
+import socket as net_socket
+import struct
+import pickle
 from ultralytics import YOLO
 
 def vid_detection(path_x):
 
     cap = cv2.VideoCapture(path_x)
 
-    frame_width = int(cap.get(3))
+    frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 
-    frame_height = int(cap.get(4))
+    frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
 
@@ -79,3 +82,28 @@ def img_detection(path_x):
         resize_frame = cv2.resize(img, (0,0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
     yield img
     # out.write(frame)
+    
+def stream_video():
+    HOST = '172.20.10.3'  # Replace with PC's IP address
+    PORT = 9999
+
+    # Open webcam
+    cap = cv2.VideoCapture(0)
+    client_socket = net_socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((HOST, PORT))
+
+    # Stream video
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        # Serialize frame
+        data = pickle.dumps(frame)
+        message_size = struct.pack("L", len(data))
+
+        # Send size + data
+        client_socket.sendall(message_size + data)
+
+    cap.release()
+    client_socket.close()
