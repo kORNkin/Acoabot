@@ -1,9 +1,9 @@
 from flask import Flask, Response, render_template, jsonify, request
-from video_dectect import vid_detection, img_detection, pc_detection
+from video_dectect import vid_detection, img_detection
 import cv2
 from test import vid_detection, img_detection, webcam_detection
-import smbus
-import serial
+# import smbus
+# import serial
 import time
 import os
 
@@ -17,14 +17,14 @@ import zlib
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'kornkin'
 
-# Raspberry Pi 4's I2C bus number
+# # Raspberry Pi 4's I2C bus number
 
-if os.path.exists("/dev/ttyUSB0"):
-    ser = serial.Serial ("/dev/ttyUSB0", 9600)
-    print("USB0 connect!")
-else: 
-    ser = serial.Serial ("/dev/ttyUSB1", 9600)
-    print("USB1 connect!")
+# if os.path.exists("/dev/ttyUSB0"):
+#     ser = serial.Serial ("/dev/ttyUSB0", 9600)
+#     print("USB0 connect!")
+# else: 
+#     ser = serial.Serial ("/dev/ttyUSB1", 9600)
+#     print("USB1 connect!")
 
 #time.sleep(3)
 #ser.reset_input_buffer()
@@ -38,19 +38,14 @@ def handle_command(command):
     send_data(command)  # Corrected function name
     return f"Command '{command}' sent to Arduino."
     
-def generate_pc_detection():
-    yolo_out = pc_detection()
-    for detection_ in yolo_out:
-        ret, buffer = cv2.imencode('.jpg', detection_)
+# def generate_pc_detection():
+#     yolo_out = pc_detection()
+#     for detection_ in yolo_out:
+#         ret, buffer = cv2.imencode('.jpg', detection_)
 
-        frame = buffer.tobytes()
-        yield (b'--frame\r\n'
-                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-    
-@app.route('/video_feed')
-def video_feed():
-    return Response(generate_pc_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
+#         frame = buffer.tobytes()
+#         yield (b'--frame\r\n'
+#                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 def generate_webcam():
     yolo_out = webcam_detection()
@@ -133,6 +128,17 @@ def set_mode():
     mode = request.json.get('mode')
     print(f"Setting mode to {mode}")
     # Here you would include code to set the mode on the robot
+    return jsonify({'status': 'success'})
+
+@app.route('/camera_set_mode', methods=['POST'])
+def camera_set_mode():
+    mode = request.json.get('mode')
+    print(f"Setting mode to {mode}")
+    # Here you would include code to set the mode on the robot
+    if mode == "stabilize":
+        handle_command()
+    elif mode == "manual":
+        handle_command()
     return jsonify({'status': 'success'})
 
 if __name__ == "__main__":

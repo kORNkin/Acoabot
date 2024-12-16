@@ -15,11 +15,14 @@
         header {
             background: rgb(206,233,255);
             background: linear-gradient(180deg, rgba(206,233,255,1) 0%, rgba(232,250,240,1) 100%);
-            padding: 5px;
+            background-size: contain;
             text-align: center;
             font-size: 24px;
             font-weight: bold;
             color: #3C4858;
+            margin: 0;
+            padding: 0;
+            width: 100%;
         }
         header img {
             width: 300px ;
@@ -103,6 +106,9 @@
             color: white;
             text-shadow: 2px 2px #000000;
         }
+        .flash-button button:active {
+            border: 7px solid #e7de6c;
+        }
         .joystick-container {
             flex: 2;
             text-align: center;
@@ -126,6 +132,9 @@
             width: 100px;
             height: 100px;
         }
+        .joystick button:active {
+            border: 7px solid #6bbf5a;
+        }
         .joystick .up {
             grid-column: 2;
             grid-row: 1;
@@ -142,12 +151,17 @@
             grid-column: 2;
             grid-row: 3;
         }
+        
         .direction-buttons {
-            display: flex;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: 100px 100px;
+            grid-template-rows: 100px 100px;
+            justify-content: center;
+            align-content: center;
             align-items: center;
             flex: 1;
             margin: 0 20px;
+            gap: 20px;
             text-align: center;
         }
         .direction-buttons button {
@@ -159,6 +173,9 @@
             cursor: pointer;
             width: 100px;
             height: 100px;
+        }
+        .direction-buttons button:active {
+            border: 7px solid #5aa6bf;
         }
         .direction-buttons .text {
             font-size: 14px;
@@ -184,10 +201,117 @@
             width: 100px;
             height: 100px;
         }
+        .stop-button button:active {
+            border: 7px solid #bf5a5a;
+        }
         .stop-button .text {
             font-size: 14px;
             color: #3C4858;
             margin-bottom: 5px;
+        }
+
+        .camera-mode {
+            flex: 1;
+            text-align: center;
+            justify-content: center;
+            align-content: center;
+        }
+        .camera-mode button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            font-size: 25px;
+            cursor: pointer;
+            background-color: #B3E5FC;
+            color: #3C4858;
+            margin: 10px 0;
+            display: block;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .camera-mode button.active {
+            background-color: #64B5F6;
+            color: white;
+            text-shadow: 2px 2px #000000;
+        }
+
+        .camera-lift-container {
+            flex: 2;
+            text-align: center;
+        }
+        .camera-lift {
+            display: grid;
+            grid-template-columns: 80px 80px 80px;
+            grid-template-rows: 80px 80px 80px;
+            justify-content: center;
+            align-items: center;
+            gap: 0px;
+            position: relative;
+        }
+        .camera-lift button {
+            background-color: #FFFFFF;
+            border: 4px solid #3C4858;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+        }
+        .camera-lift button:active {
+            border: 7px solid #936ce7;
+        }
+        .camera-lift .up {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .camera-lift .down {
+            grid-column: 2;
+            grid-row: 3;
+        }
+        
+        .camera-joystick-container {
+            flex: 2;
+            text-align: center;
+        }
+        .camera-joystick {
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+            grid-template-rows: 100px 100px 100px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+        .camera-joystick button {
+            background-color: #FFFFFF;
+            border: 4px solid #3C4858;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+        }
+        .camera-joystick button:active {
+            border: 7px solid #936ce7;
+        }
+        .camera-joystick .up {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .camera-joystick .left {
+            grid-column: 1;
+            grid-row: 2;
+        }
+        .camera-joystick .right {
+            grid-column: 3;
+            grid-row: 2;
+        }
+        .camera-joystick .down {
+            grid-column: 2;
+            grid-row: 3;
         }
 
         .flash-button {
@@ -219,14 +343,17 @@
             display: none;
             flex-direction: column;
             flex: 2;
-            text-align: left;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
             font-size: 20px;
         }
         .auto-panel h2 {
             margin-bottom: 10px;
         }
         .auto-panel input {
-            width: 1000px;
+            width: 80%;
             padding: 40px;
             margin-bottom: 10px;
             border-radius: 10px;
@@ -261,7 +388,7 @@
 
         .home-input-btn {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             gap: 30px;
         }
         .ml16 {
@@ -330,7 +457,7 @@
     <div class="content">
         <div class="video-feed" style="max-width:600px;">
             <h2>Farm View</h2>
-            <img src="{{ url_for('video_feed') }}" alt="Farm View">
+            <img src="{{ url_for('webcam') }}" alt="Farm View">
         </div>
         <div class="info-panel">
             <div class="gps">
@@ -351,37 +478,61 @@
         </div>
         <div class="flash-button">
             <div>
-                <button onclick="sendCommand('f'); return false;"><img src="{{url_for('static', filename='light.png')}}" alt="light"></button>
+                <button onclick="sendCommand('f'); return false;" ontouchstart=""><img src="{{url_for('static', filename='light.png')}}" alt="light"></button>
             </div>
         </div>
     </div>
     <div class="control-container">
-        <div id="manual-controls" style="display: none; width: 100%;">
+        <div id="manual-controls" style="display: none; width: 100%; flex-wrap: wrap;">
             <div class="joystick-container">
+                <h2>Acoabot</h2>
                 <div class="joystick">
-                    <button class="up" onclick="sendCommand('w'); return false;"><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
-                    <button class="left" onclick="sendCommand('u'); return false;"><img src="{{url_for('static', filename='left.png')}}" alt="left"></button>
-                    <button class="right" onclick="sendCommand('o'); return false;"><img src="{{url_for('static', filename='right.png')}}" alt="right"></button>
-                    <button class="down" onclick="sendCommand('s'); return false;"><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
+                    <button class="up" onclick="sendCommand('w'); return false;" ontouchstart=""><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
+                    <button class="left" onclick="sendCommand('a'); return false;" ontouchstart=""><img src="{{url_for('static', filename='left.png')}}" alt="left"></button>
+                    <button class="right" onclick="sendCommand('d'); return false;" ontouchstart=""><img src="{{url_for('static', filename='right.png')}}" alt="right"></button>
+                    <button class="down" onclick="sendCommand('s'); return false;" ontouchstart=""><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
                 </div>
             </div> 
             <div class="direction-buttons">
                 <div>
-                    <h3>Turn Left</h3>
-                    <button onclick="sendCommand('q'); return false;"><img src="{{url_for('static', filename='turn-left.png')}}" alt="turn-left" style="width:50px;"></button>
+                    <button class="straight" onclick="sendCommand('x'); return false;" ontouchstart=""><img src="{{url_for('static', filename='straight.png')}}" alt="straight" style="width:50px;"></button>
                 </div>
                 <div>
-                    <h3>Turn Right</h3>
-                    <button onclick="sendCommand('e'); return false;"><img src="{{url_for('static', filename='turn-right.png')}}" alt="turn-right" style="width:50px;"></button>
+                    <button class="turn-around" onclick="sendCommand('z'); return false;" ontouchstart=""><img src="{{url_for('static', filename='turn-around.png')}}" alt="turn-around" style="width:50px;"></button>
+                </div>
+                <div>
+                    <button class="turn-left" onclick="sendCommand('q'); return false;" ontouchstart=""><img src="{{url_for('static', filename='turn-left.png')}}" alt="turn-left" style="width:50px;"></button>
+                </div>
+                <div>
+                    <button class="turn-right" onclick="sendCommand('e'); return false;" ontouchstart=""><img src="{{url_for('static', filename='turn-right.png')}}" alt="turn-right" style="width:50px;"></button>
                 </div>
             </div>
             <div class="stop-button">
                 <div>
-                    <button onclick="sendCommand('h'); return false;">Stop</button>
+                    <button onclick="sendCommand('h'); return false;" ontouchstart="">Stop</button>
                 </div>
             </div>
-            
-            
+            <div class="camera-mode">
+                <button id="camera-self-stabilize" class="active">Self Stabilize</button>
+                <button id="camera-manual">Manual</button>
+            </div>
+            <div id="camera-setting" style="display:none">
+                <div class="camera-lift-container">
+                    <h2>Lifting</h2> <br><br>
+                    <div class="camera-lift"> 
+                        <button class="up" onclick="sendCommand('w'); return false;" ontouchstart=""><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
+                        <button class="down" onclick="sendCommand('s'); return false;" ontouchstart=""><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
+                    </div>
+                </div>
+                <div class="camera-joystick-container">
+                    <h2>Camera</h2>
+                    <div class="camera-joystick">
+                        <button class="up" onclick="sendCommand('w'); return false;" ontouchstart=""><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
+                        <button class="left" onclick="sendCommand('u'); return false;" ontouchstart=""><img src="{{url_for('static', filename='left.png')}}" alt="left"></button>
+                        <button class="right" onclick="sendCommand('o'); return false;" ontouchstart=""><img src="{{url_for('static', filename='right.png')}}" alt="right"></button>
+                        <button class="down" onclick="sendCommand('s'); return false;" ontouchstart=""><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
+                    </div>
+                </div> 
             </div>
         </div>
         <div id="auto-controls" class="auto-panel" style="display: flex;">
@@ -428,6 +579,9 @@
         const manualBtn = document.getElementById('manual-btn');
         const autoBtn = document.getElementById('auto-btn');
         const manualControls = document.getElementById('manual-controls');
+        const camStabilize = document.getElementById('camera-self-stabilize');
+        const camManual = document.getElementById('camera-manual');
+        const camSetting = document.getElementById('camera-setting');
         const autoControls = document.getElementById('auto-controls');
         const homePositionInput = document.getElementById('home-position');
         const newWaypointInput = document.getElementById('new-waypoint');
@@ -441,9 +595,13 @@
             xhr.send();
         }
 
+        // Switching between Manual and Auto Mode
         manualBtn.addEventListener('click', () => {
             manualBtn.classList.add('active');
             autoBtn.classList.remove('active');
+            manualControls.style.display = 'flex';
+            autoControls.style.display = 'none';
+
             fetch('/set_mode', {
                 method: 'POST',
                 headers: {
@@ -455,16 +613,51 @@
             .then(data => console.log(data))
             .catch(error => console.error('Error:', error));
         });
-
         autoBtn.addEventListener('click', () => {
             autoBtn.classList.add('active');
             manualBtn.classList.remove('active');
+            manualControls.style.display = 'none';
+            autoControls.style.display = 'flex';
             fetch('/set_mode', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ mode: 'auto' })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Switching between Self Stabilize and Manual Camera Control
+        camStabilize.addEventListener('click', () => {
+            camStabilize.classList.add('active');
+            camManual.classList.remove('active');
+            camSetting.style.display = 'none';
+
+            fetch('/camera_set_mode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mode: 'stabilize' })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        });
+        camManual.addEventListener('click', () => {
+            camManual.classList.add('active');
+            camStabilize.classList.remove('active');
+            camSetting.style.display = 'flex';
+
+            fetch('/camera_set_mode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mode: 'manual' })
             })
             .then(response => response.json())
             .then(data => console.log(data))
@@ -487,29 +680,6 @@
                 })
                 .catch(error => console.error('Error:', error));
         }, 1000);     
-
-        // Switching between Manual and Auto Mode
-        manualBtn.addEventListener('click', () => {
-            manualBtn.classList.add('active');
-            autoBtn.classList.remove('active');
-            manualControls.style.display = 'flex';
-            autoControls.style.display = 'none';
-        });
-
-        autoBtn.addEventListener('click', () => {
-            autoBtn.classList.add('active');
-            manualBtn.classList.remove('active');
-            manualControls.style.display = 'none';
-            autoControls.style.display = 'flex';
-        });
-
-        //Submit change color
-        autoBtn.addEventListener('click', () => {
-            autoBtn.classList.add('active');
-            manualBtn.classList.remove('active');
-            manualControls.style.display = 'none';
-            autoControls.style.display = 'flex';
-        });
 
         //Submit home to server
         function submitHome() {
