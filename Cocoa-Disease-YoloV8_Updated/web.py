@@ -1,15 +1,13 @@
 from flask import Flask, Response, render_template, jsonify, request
 from video_dectect import vid_detection, img_detection
 import cv2
-from test import vid_detection, img_detection, webcam_detection
+from cocoa_disease_detection import vid_detection, img_detection, webcam_detection
 # import smbus
-# import serial
+import serial
 import time
 import os
 
-import socket
-import sys
-import pickle
+import threading
 import numpy as np
 import struct 
 import zlib
@@ -17,17 +15,40 @@ import zlib
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'kornkin'
 
-# # Raspberry Pi 4's I2C bus number
+# Raspberry Pi 4's I2C bus number
 
-# if os.path.exists("/dev/ttyUSB0"):
-#     ser = serial.Serial ("/dev/ttyUSB0", 9600)
-#     print("USB0 connect!")
-# else: 
-#     ser = serial.Serial ("/dev/ttyUSB1", 9600)
-#     print("USB1 connect!")
+if os.path.exists("/dev/ttyUSB0"):
+    ser = serial.Serial ("/dev/ttyUSB0", 9600)
+    print("USB0 connect!")
+else: 
+    ser = serial.Serial ("/dev/ttyUSB1", 9600)
+    print("USB1 connect!")
 
-#time.sleep(3)
-#ser.reset_input_buffer()
+time.sleep(3)
+ser.reset_input_buffer()
+
+# Shared variable for GPS data
+gps_data = "No GPS data received"  # Default value until data is read
+
+# Background thread to continuously read data from Arduino
+def read_serial_data():
+    global gps_data
+    while True:
+        if ser.in_waiting > 0:
+            try:
+                # Read and decode the line
+                line = ser.readline().decode('utf-8').strip()
+                
+                # Check if the line starts with "GPS:"
+                if line.startswith("GPS:"):
+                    gps_data = line[4:].strip()  # Extract everything after "GPS:"
+                    print(f"Updated GPS data: {gps_data}")  # Optional: log the received GPS data
+            except Exception as e:
+                print(f"Error reading from serial: {e}")
+
+# Start the background thread
+thread = threading.Thread(target=read_serial_data, daemon=True)
+thread.start()
 
 # Function to send command to Arduino
 def send_data(data):
@@ -99,8 +120,6 @@ def img():
 def img_dynamic(num):
     return Response(generate_img(path_x = f'img/{str(num)}.jpg'), mimetype = 'multipart/x-mixed-replace; boundary=frame')
 
-# Mock data for GPS and infected plants
-gps_data = "8.772249, 99.923447"
 infected_data = {
     "infected": 0,
     "blackpod": 0,
