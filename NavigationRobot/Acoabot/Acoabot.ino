@@ -92,8 +92,6 @@ void setup() {
   Serial.begin(57600); // connect serial
   Serial3.begin(9600); // connect gps sensor
 
-  Serial.println(F("ESP32 - GPS module"));
-
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
 
@@ -216,7 +214,8 @@ void loop() {
     }else if(inputData.startsWith("q")){ turnLeft();
     }else if(inputData.startsWith("e")){ turnRight();
     }else if(inputData.startsWith("x")){ straight();
-    }else if(inputData.startsWith("z")){ turnAround();
+    }else if(inputData.startsWith("z")){ slide();
+    }else if(inputData.startsWith("h")){ stopMotor();
     }else if(inputData.startsWith("f")){
       if(light){
         digitalWrite(lightPin, 0);
@@ -261,8 +260,8 @@ void loop() {
   while(Serial3.available()){ // check for gps data
     if(gps.encode(Serial3.read()))// encode gps data
     {
-      Serial.print("GPS:")
-      Serial.println(gps.location.lat(),6); //Latitude
+      Serial.print("GPS:");
+      Serial.print(gps.location.lat(),6); //Latitude
       Serial.print(", ");
       Serial.println(gps.location.lng(),6); //Longitude
 
@@ -285,16 +284,6 @@ void loop() {
 }
 
 void forward() {
-  servo_RF.write(start_angle + RF_ofst);
-  servo_RM.write(start_angle + RM_ofst);
-  servo_RB.write(start_angle + RB_ofst);
-
-  servo_LF.write(start_angle + LF_ofst);
-  servo_LM.write(start_angle + LM_ofst);
-  servo_LB.write(start_angle + LB_ofst);
-
-  delay(1000);
-
   setMotor(-1, 255, PWM_RF, IN1_RF, IN2_RF);
   setMotor(-1, 255, PWM_RM, IN1_RM, IN2_RM);
   setMotor(-1, 255, PWM_RB, IN1_RB, IN2_RB);
@@ -305,18 +294,6 @@ void forward() {
 }
 
 void reverse() {
-  // Run the motor counter-clockwise
-  // Run the motor clockwise
-  servo_RF.write(start_angle + RF_ofst);
-  servo_RM.write(start_angle + RM_ofst);
-  servo_RB.write(start_angle + RB_ofst);
-
-  servo_LF.write(start_angle + LF_ofst);
-  servo_LM.write(start_angle + LM_ofst);
-  servo_LB.write(start_angle + LB_ofst);
-
-  delay(1000);
-
   setMotor(1, 255, PWM_RF, IN1_RF, IN2_RF);
   setMotor(1, 255, PWM_RM, IN1_RM, IN2_RM);
   setMotor(1, 255, PWM_RB, IN1_RB, IN2_RB);
@@ -324,7 +301,7 @@ void reverse() {
   setMotor(1, 255, PWM_LF, IN1_LF, IN2_LF);
   setMotor(1, 255, PWM_LM, IN1_LM, IN2_LM);
   setMotor(1, 255, PWM_LB, IN1_LB, IN2_LB);
-}
+}   
 
 void straight(){
   servo_RF.write(start_angle + RF_ofst);
@@ -337,42 +314,6 @@ void straight(){
 }
 
 void right(){
-  servo_RF.write(175 + RF_ofst);
-  servo_RM.write(175 + RM_ofst);
-  servo_RB.write(175 + RB_ofst);
-
-  servo_LF.write(175 + LF_ofst);
-  servo_LM.write(175 + LM_ofst);
-  servo_LB.write(175 + LB_ofst);
-
-  setMotor(1, 255, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(1, 255, PWM_RM, IN1_RM, IN2_RM);
-  setMotor(1, 255, PWM_RB, IN1_RB, IN2_RB);
-
-  setMotor(1, 255, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(1, 255, PWM_LM, IN1_LM, IN2_LM);
-  setMotor(1, 255, PWM_LB, IN1_LB, IN2_LB);
-} 
-
-void left(){
-  servo_RF.write(175 + RF_ofst);
-  servo_RM.write(175 + RM_ofst);
-  servo_RB.write(175 + RB_ofst);
-
-  servo_LF.write(175 + LF_ofst);
-  servo_LM.write(175 + LM_ofst);
-  servo_LB.write(175 + LB_ofst);
-
-  setMotor(-1, 255, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(-1, 255, PWM_RM, IN1_RM, IN2_RM);
-  setMotor(-1, 255, PWM_RB, IN1_RB, IN2_RB);
-
-  setMotor(-1, 255, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(-1, 255, PWM_LM, IN1_LM, IN2_LM);
-  setMotor(-1, 255, PWM_LB, IN1_LB, IN2_LB);
-} 
-
-void turnRight(){
   servo_RF.write(130 + RF_ofst);
   servo_RM.write(110 + RM_ofst);
   servo_RB.write(90 + RB_ofst);
@@ -380,11 +321,9 @@ void turnRight(){
   servo_LF.write(130 + LF_ofst);
   servo_LM.write(110 + LM_ofst);
   servo_LB.write(90 + LB_ofst);
+} 
 
-  delay(15);
-}
-
-void tunrLeft(){
+void left(){
   servo_RF.write(50 + RF_ofst);
   servo_RM.write(70 + RM_ofst);
   servo_RB.write(90 + RB_ofst);
@@ -392,8 +331,46 @@ void tunrLeft(){
   servo_LF.write(50 + LF_ofst);
   servo_LM.write(70 + LM_ofst);
   servo_LB.write(90 + LB_ofst);
+} 
 
-  delay(15);
+void turnRight(){
+  servo_RF.write(45 + RF_ofst);
+  servo_RM.write(start_angle + RM_ofst);
+  servo_RB.write(135 + RB_ofst);
+
+  servo_LF.write(135 + LF_ofst);
+  servo_LM.write(start_angle + LM_ofst);
+  servo_LB.write(45 + LB_ofst);
+
+  delay(1000);
+
+  setMotor(1, 200, PWM_RF, IN1_RF, IN2_RF);
+  setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
+  setMotor(1, 200, PWM_RB, IN1_RB, IN2_RB);
+
+  setMotor(-1, 200, PWM_LF, IN1_LF, IN2_LF);
+  setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
+  setMotor(-1, 200, PWM_LB, IN1_LB, IN2_LB);
+}
+
+void turnLeft(){
+  servo_RF.write(45 + RF_ofst);
+  servo_RM.write(start_angle + RM_ofst);
+  servo_RB.write(135 + RB_ofst);
+
+  servo_LF.write(135 + LF_ofst);
+  servo_LM.write(start_angle + LM_ofst);
+  servo_LB.write(45 + LB_ofst);
+
+  delay(1000);
+
+  setMotor(-1, 200, PWM_RF, IN1_RF, IN2_RF);
+  setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
+  setMotor(-1, 200, PWM_RB, IN1_RB, IN2_RB);
+
+  setMotor(1, 200, PWM_LF, IN1_LF, IN2_LF);
+  setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
+  setMotor(1, 200, PWM_LB, IN1_LB, IN2_LB);
 }
 
 void smallRight(){
@@ -420,14 +397,24 @@ void smallLeft(){
   delay(15);
 }
 
-void turnAround(){
-  servo_RF.write(135 + RF_ofst);
-  servo_RM.write(start_angle + RM_ofst);
-  servo_RB.write(45 + RB_ofst);
+void slide(){
+  servo_RF.write(175 + RF_ofst);
+  servo_RM.write(175 + RM_ofst);
+  servo_RB.write(175 + RB_ofst);
 
-  servo_LF.write(45 + LF_ofst);
-  servo_LM.write(start_angle + LM_ofst);
-  servo_LB.write(135 + LB_ofst);
+  servo_LF.write(175 + LF_ofst);
+  servo_LM.write(175 + LM_ofst);
+  servo_LB.write(175 + LB_ofst);
+}
+
+void stopMotor() {
+  setMotor(0, 0, PWM_RF, IN1_RF, IN2_RF);
+  setMotor(0, 0, PWM_RM, IN1_RM, IN2_RM);
+  setMotor(0, 0, PWM_RB, IN1_RB, IN2_RB);
+
+  setMotor(0, 0, PWM_LF, IN1_LF, IN2_LF);
+  setMotor(0, 0, PWM_LM, IN1_LM, IN2_LM);
+  setMotor(0, 0, PWM_LB, IN1_LB, IN2_LB);
 }
 
 void setMotor(int dir, int pwmVal, int pwm, int in1, int in2){

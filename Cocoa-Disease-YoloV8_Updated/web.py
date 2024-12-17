@@ -18,10 +18,10 @@ app.config['SECRET_KEY'] = 'kornkin'
 # Raspberry Pi 4's I2C bus number
 
 if os.path.exists("/dev/ttyUSB0"):
-    ser = serial.Serial ("/dev/ttyUSB0", 9600)
+    ser = serial.Serial ("/dev/ttyUSB0", 57600)
     print("USB0 connect!")
 else: 
-    ser = serial.Serial ("/dev/ttyUSB1", 9600)
+    ser = serial.Serial ("/dev/ttyUSB1", 57600)
     print("USB1 connect!")
 
 time.sleep(3)
@@ -29,26 +29,6 @@ ser.reset_input_buffer()
 
 # Shared variable for GPS data
 gps_data = "No GPS data received"  # Default value until data is read
-
-# Background thread to continuously read data from Arduino
-def read_serial_data():
-    global gps_data
-    while True:
-        if ser.in_waiting > 0:
-            try:
-                # Read and decode the line
-                line = ser.readline().decode('utf-8').strip()
-                
-                # Check if the line starts with "GPS:"
-                if line.startswith("GPS:"):
-                    gps_data = line[4:].strip()  # Extract everything after "GPS:"
-                    print(f"Updated GPS data: {gps_data}")  # Optional: log the received GPS data
-            except Exception as e:
-                print(f"Error reading from serial: {e}")
-
-# Start the background thread
-thread = threading.Thread(target=read_serial_data, daemon=True)
-thread.start()
 
 # Function to send command to Arduino
 def send_data(data):
@@ -59,15 +39,6 @@ def handle_command(command):
     send_data(command)  # Corrected function name
     return f"Command '{command}' sent to Arduino."
     
-# def generate_pc_detection():
-#     yolo_out = pc_detection()
-#     for detection_ in yolo_out:
-#         ret, buffer = cv2.imencode('.jpg', detection_)
-
-#         frame = buffer.tobytes()
-#         yield (b'--frame\r\n'
-#                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
 def generate_webcam():
     yolo_out = webcam_detection()
     for detection_ in yolo_out:
@@ -129,6 +100,17 @@ infected_data = {
 
 @app.route('/get_gps', methods=['GET'])
 def get_gps():
+    if ser.in_waiting > 0:
+        try:
+            # Read and decode the line
+            line = ser.readline().decode('utf-8').strip()
+                
+            # Check if the line starts with "GPS:"
+            if line.startswith("GPS:"):
+                gps_data = line[4:].strip()  # Extract everything after "GPS:"
+                print(f"Updated GPS data: {gps_data}")  # Optional: log the received GPS data
+        except Exception as e:
+            print(f"Error reading from serial: {e}")
     return jsonify({'gps': gps_data})
 
 @app.route('/get_infected_data', methods=['GET'])
