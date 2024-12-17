@@ -119,7 +119,7 @@
             grid-template-rows: 100px 100px 100px;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
             position: relative;
         }
         .joystick button {
@@ -141,6 +141,10 @@
         }
         .joystick .left {
             grid-column: 1;
+            grid-row: 2;
+        }
+        .joystick .straight {
+            grid-column: 2;
             grid-row: 2;
         }
         .joystick .right {
@@ -489,16 +493,17 @@
                 <div class="joystick">
                     <button class="up" onclick="sendCommand('w'); return false;" ontouchstart=""><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
                     <button class="left" onclick="sendCommand('a'); return false;" ontouchstart=""><img src="{{url_for('static', filename='left.png')}}" alt="left"></button>
+                    <button class="straight" onclick="sendCommand('x'); return false;" ontouchstart=""><img src="{{url_for('static', filename='straight.png')}}" alt="straight" style="width:50px;"></button>
                     <button class="right" onclick="sendCommand('d'); return false;" ontouchstart=""><img src="{{url_for('static', filename='right.png')}}" alt="right"></button>
                     <button class="down" onclick="sendCommand('s'); return false;" ontouchstart=""><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
                 </div>
             </div> 
             <div class="direction-buttons">
                 <div>
-                    <button class="straight" onclick="sendCommand('x'); return false;" ontouchstart=""><img src="{{url_for('static', filename='straight.png')}}" alt="straight" style="width:50px;"></button>
+                    <button class="calibrate" onclick="sendCommand('r'); return false;" ontouchstart=""><img src="{{url_for('static', filename='calibrate.png')}}" alt="calibrate" style="width:50px;"></button>
                 </div>
                 <div>
-                    <button class="turn-around" onclick="sendCommand('z'); return false;" ontouchstart=""><img src="{{url_for('static', filename='slide.png')}}" alt="turn-around" style="width:50px;"></button>
+                    <button class="slide" onclick="sendCommand('z'); return false;" ontouchstart=""><img src="{{url_for('static', filename='slide.png')}}" alt="slide" style="width:50px;"></button>
                 </div>
                 <div>
                     <button class="turn-left" onclick="sendCommand('q'); return false;" ontouchstart=""><img src="{{url_for('static', filename='turn-left.png')}}" alt="turn-left" style="width:50px;"></button>
@@ -520,17 +525,17 @@
                 <div class="camera-lift-container">
                     <h2>Lifting</h2> <br><br>
                     <div class="camera-lift"> 
-                        <button class="up" onclick="sendCommand('w'); return false;" ontouchstart=""><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
-                        <button class="down" onclick="sendCommand('s'); return false;" ontouchstart=""><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
+                        <button class="up" onclick="sendCommand('o'); return false;" ontouchstart=""><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
+                        <button class="down" onclick="sendCommand('l'); return false;" ontouchstart=""><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
                     </div>
                 </div>
                 <div class="camera-joystick-container">
                     <h2>Camera</h2>
                     <div class="camera-joystick">
-                        <button class="up" onclick="sendCommand('w'); return false;" ontouchstart=""><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
-                        <button class="left" onclick="sendCommand('u'); return false;" ontouchstart=""><img src="{{url_for('static', filename='left.png')}}" alt="left"></button>
-                        <button class="right" onclick="sendCommand('o'); return false;" ontouchstart=""><img src="{{url_for('static', filename='right.png')}}" alt="right"></button>
-                        <button class="down" onclick="sendCommand('s'); return false;" ontouchstart=""><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
+                        <button class="up" onclick="sendCommand('u'); return false;" ontouchstart=""><img src="{{url_for('static', filename='up.png')}}" alt="up"></button>
+                        <button class="left" onclick="sendCommand('h'); return false;" ontouchstart=""><img src="{{url_for('static', filename='left.png')}}" alt="left"></button>
+                        <button class="right" onclick="sendCommand('k'); return false;" ontouchstart=""><img src="{{url_for('static', filename='right.png')}}" alt="right"></button>
+                        <button class="down" onclick="sendCommand('j'); return false;" ontouchstart=""><img src="{{url_for('static', filename='down.png')}}" alt="down"></button>
                     </div>
                 </div> 
             </div>

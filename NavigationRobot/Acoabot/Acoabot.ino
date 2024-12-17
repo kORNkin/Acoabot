@@ -34,23 +34,23 @@ TinyGPSPlus gps; // create gps object
 #define IN1_RF 25
 #define IN2_RF 23
 
-#define PWM_RM 12
-#define IN1_RM 27
-#define IN2_RM 29
+// #define PWM_RM 12
+// #define IN1_RM 27
+// #define IN2_RM 29
 
-#define PWM_RB 11
+#define PWM_RB 12
 #define IN1_RB 31
 #define IN2_RB 33
 //L
-#define PWM_LF 10
+#define PWM_LF 11
 #define IN1_LF 35
 #define IN2_LF 37
 
-#define PWM_LM 9
-#define IN1_LM 39
-#define IN2_LM 41
+// #define PWM_LM 9
+// #define IN1_LM 39
+// #define IN2_LM 41
 
-#define PWM_LB 8
+#define PWM_LB 10
 #define IN1_LB 45
 #define IN2_LB 43
 
@@ -66,6 +66,9 @@ Servo servo_RB;
 Servo servo_LF;
 Servo servo_LM;
 Servo servo_LB;
+
+Servo camL;
+Servo camH;
 
 /*
 FL 102
@@ -153,6 +156,9 @@ void setup() {
   servo_LM.attach(3);
   servo_LB.attach(2);
 
+  camL.attach(9);
+  camH.attach(8);
+
   servo_RF.write(start_angle + RF_ofst);
   servo_RM.write(start_angle + RM_ofst);
   servo_RB.write(start_angle + RB_ofst);
@@ -210,12 +216,15 @@ void loop() {
     else if(inputData.startsWith("w")){ forward();
     }else if(inputData.startsWith("s")){ reverse();
     }else if(inputData.startsWith("a")){ left();
+    }else if(inputData.startsWith("x")){ straight();
     }else if(inputData.startsWith("d")){ right();
+    }else if(inputData.startsWith("r")){ calibrate();
+    }else if(inputData.startsWith("z")){ slide();
     }else if(inputData.startsWith("q")){ turnLeft();
     }else if(inputData.startsWith("e")){ turnRight();
-    }else if(inputData.startsWith("x")){ straight();
-    }else if(inputData.startsWith("z")){ slide();
     }else if(inputData.startsWith("h")){ stopMotor();
+    }else if(inputData.startsWith("o")){ camUp();
+    }else if(inputData.startsWith("l")){ camDown();
     }else if(inputData.startsWith("f")){
       if(light){
         digitalWrite(lightPin, 0);
@@ -334,13 +343,13 @@ void left(){
 } 
 
 void turnRight(){
-  servo_RF.write(45 + RF_ofst);
+  servo_RF.write(60 + RF_ofst);
   servo_RM.write(start_angle + RM_ofst);
-  servo_RB.write(135 + RB_ofst);
+  servo_RB.write(120 + RB_ofst);
 
-  servo_LF.write(135 + LF_ofst);
+  servo_LF.write(120 + LF_ofst);
   servo_LM.write(start_angle + LM_ofst);
-  servo_LB.write(45 + LB_ofst);
+  servo_LB.write(60 + LB_ofst);
 
   delay(1000);
 
@@ -354,13 +363,13 @@ void turnRight(){
 }
 
 void turnLeft(){
-  servo_RF.write(45 + RF_ofst);
+  servo_RF.write(60 + RF_ofst);
   servo_RM.write(start_angle + RM_ofst);
-  servo_RB.write(135 + RB_ofst);
+  servo_RB.write(120 + RB_ofst);
 
-  servo_LF.write(135 + LF_ofst);
+  servo_LF.write(120 + LF_ofst);
   servo_LM.write(start_angle + LM_ofst);
-  servo_LB.write(45 + LB_ofst);
+  servo_LB.write(60 + LB_ofst);
 
   delay(1000);
 
@@ -395,6 +404,51 @@ void smallLeft(){
   servo_LB.write(90 + LB_ofst);
 
   delay(15);
+}
+
+void calibrate(){
+  setMotor(1, 200, PWM_RF, IN1_RF, IN2_RF);
+  setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
+  setMotor(1, 200, PWM_RB, IN1_RB, IN2_RB);
+  setMotor(1, 200, PWM_LF, IN1_LF, IN2_LF);
+  setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
+  setMotor(1, 200, PWM_LB, IN1_LB, IN2_LB);
+
+  delay(400);
+
+  setMotor(-1, 200, PWM_RF, IN1_RF, IN2_RF);
+  setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
+  setMotor(-1, 200, PWM_RB, IN1_RB, IN2_RB);
+  setMotor(-1, 200, PWM_LF, IN1_LF, IN2_LF);
+  setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
+  setMotor(-1, 200, PWM_LB, IN1_LB, IN2_LB);
+
+  delay(400);
+
+  setMotor(1, 200, PWM_RF, IN1_RF, IN2_RF);
+  setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
+  setMotor(1, 200, PWM_RB, IN1_RB, IN2_RB);
+  setMotor(1, 200, PWM_LF, IN1_LF, IN2_LF);
+  setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
+  setMotor(1, 200, PWM_LB, IN1_LB, IN2_LB);
+
+  delay(400);
+
+  setMotor(-1, 200, PWM_RF, IN1_RF, IN2_RF);
+  setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
+  setMotor(-1, 200, PWM_RB, IN1_RB, IN2_RB);
+  setMotor(-1, 200, PWM_LF, IN1_LF, IN2_LF);
+  setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
+  setMotor(-1, 200, PWM_LB, IN1_LB, IN2_LB);
+
+  delay(400);
+
+  setMotor(0, 0, PWM_RF, IN1_RF, IN2_RF);
+  setMotor(0, 0, PWM_RM, IN1_RM, IN2_RM);
+  setMotor(0, 0, PWM_RB, IN1_RB, IN2_RB);
+  setMotor(0, 0, PWM_LF, IN1_LF, IN2_LF);
+  setMotor(0, 0, PWM_LM, IN1_LM, IN2_LM);
+  setMotor(0, 0, PWM_LB, IN1_LB, IN2_LB); 
 }
 
 void slide(){
@@ -433,5 +487,19 @@ void setMotor(int dir, int pwmVal, int pwm, int in1, int in2){
     digitalWrite(in1,LOW);
     digitalWrite(in2,LOW);
   }
+}
+
+void camUp(){
+  float l = camL.read();
+  float h = camH.read();
+  camL.write(min(160, l + 15));
+  camL.write(min(160, h + 15));
+}
+
+void camDown(){
+  float l = camL.read();
+  float h = camH.read();
+  camL.write(max(0, l - 15));
+  camL.write(max(0, h - 15));
 }
 
