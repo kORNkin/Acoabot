@@ -17,15 +17,19 @@ app.config['SECRET_KEY'] = 'kornkin'
 
 # Raspberry Pi 4's I2C bus number
 
-if os.path.exists("/dev/ttyUSB0"):
-    ser = serial.Serial ("/dev/ttyUSB0", 57600)
-    print("USB0 connect!")
-else: 
-    ser = serial.Serial ("/dev/ttyUSB1", 57600)
-    print("USB1 connect!")
+#if os.path.exists("/dev/ttyUSB0"):
+    #ser = serial.Serial ("/dev/ttyUSB0", 57600)
+    #print("USB0 connect!")
+#else: 
+    #ser = serial.Serial ("/dev/ttyUSB1", 57600)
+    #print("USB1 connect!")
+    
+ser = serial.Serial ("/dev/ttyUSB0", 57600)
+ser2 = serial.Serial ("/dev/ttyUSB1", 57600)
 
 time.sleep(3)
 ser.reset_input_buffer()
+ser2.reset_input_buffer()
 
 # Shared variable for GPS data
 gps_data = "No GPS data received"  # Default value until data is read
@@ -33,6 +37,7 @@ gps_data = "No GPS data received"  # Default value until data is read
 # Function to send command to Arduino
 def send_data(data):
     ser.write(bytes(data + '\n', encoding='utf-8'))
+    ser2.write(bytes(data + '\n', encoding='utf-8'))
     
 @app.route('/send_command/<command>')
 def handle_command(command):
@@ -111,6 +116,18 @@ def get_gps():
                 print(f"Updated GPS data: {gps_data}")  # Optional: log the received GPS data
         except Exception as e:
             print(f"Error reading from serial: {e}")
+    if ser2.in_waiting > 0:
+        try:
+            # Read and decode the line
+            line = ser.readline().decode('utf-8').strip()
+                
+            # Check if the line starts with "GPS:"
+            if line.startswith("GPS:"):
+                gps_data = line[4:].strip()  # Extract everything after "GPS:"
+                print(f"Updated GPS data: {gps_data}")  # Optional: log the received GPS data
+        except Exception as e:
+            print(f"Error reading from serial: {e}")
+            
     return jsonify({'gps': gps_data})
 
 @app.route('/get_infected_data', methods=['GET'])
