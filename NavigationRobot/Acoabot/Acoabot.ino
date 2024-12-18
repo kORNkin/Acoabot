@@ -127,9 +127,9 @@ void setup() {
   pinMode(IN1_LF,OUTPUT);
   pinMode(IN2_LF,OUTPUT);
 
-  pinMode(PWM_LM,OUTPUT);
-  pinMode(IN1_LM,OUTPUT);
-  pinMode(IN2_LM,OUTPUT);
+  // pinMode(PWM_LM,OUTPUT);
+  // pinMode(IN1_LM,OUTPUT);
+  // pinMode(IN2_LM,OUTPUT);
 
   pinMode(PWM_LB,OUTPUT);
   pinMode(IN1_LB,OUTPUT);
@@ -139,9 +139,9 @@ void setup() {
   pinMode(IN1_RF,OUTPUT);
   pinMode(IN2_RF,OUTPUT);
 
-  pinMode(PWM_RM,OUTPUT);
-  pinMode(IN1_RM,OUTPUT);
-  pinMode(IN2_RM,OUTPUT);
+  // pinMode(PWM_RM,OUTPUT);
+  // pinMode(IN1_RM,OUTPUT);
+  // pinMode(IN2_RM,OUTPUT);
   
   pinMode(PWM_RB,OUTPUT);
   pinMode(IN1_RB,OUTPUT);
@@ -158,6 +158,9 @@ void setup() {
 
   camL.attach(9);
   camH.attach(8);
+
+  camL.write(0);
+  camH.write(0);
 
   servo_RF.write(start_angle + RF_ofst);
   servo_RM.write(start_angle + RM_ofst);
@@ -212,8 +215,7 @@ void loop() {
   if(stringComplete){
     if(inputData.startsWith("status")){
       sendData();
-    }
-    else if(inputData.startsWith("w")){ forward();
+    }else if(inputData.startsWith("w")){ forward();
     }else if(inputData.startsWith("s")){ reverse();
     }else if(inputData.startsWith("a")){ left();
     }else if(inputData.startsWith("x")){ straight();
@@ -235,7 +237,7 @@ void loop() {
     }else if(inputData.startsWith("FF")){
       setMotor(-1, 255, PWM_LF, IN1_LF, IN2_LF);
     }else if(inputData.startsWith("MM")){
-      setMotor(-1, 255, PWM_LM, IN1_LM, IN2_LM);
+      // setMotor(-1, 255, PWM_LM, IN1_LM, IN2_LM);
     }else if(inputData.startsWith("BB")){
       setMotor(-1, 255, PWM_LB, IN1_LB, IN2_LB);
     }else if(inputData.startsWith("F")){
@@ -294,21 +296,21 @@ void loop() {
 
 void forward() {
   setMotor(-1, 255, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(-1, 255, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(-1, 255, PWM_RM, IN1_RM, IN2_RM);
   setMotor(-1, 255, PWM_RB, IN1_RB, IN2_RB);
 
   setMotor(-1, 255, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(-1, 255, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(-1, 255, PWM_LM, IN1_LM, IN2_LM);
   setMotor(-1, 255, PWM_LB, IN1_LB, IN2_LB);
 }
 
 void reverse() {
   setMotor(1, 255, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(1, 255, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(1, 255, PWM_RM, IN1_RM, IN2_RM);
   setMotor(1, 255, PWM_RB, IN1_RB, IN2_RB);
 
   setMotor(1, 255, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(1, 255, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(1, 255, PWM_LM, IN1_LM, IN2_LM);
   setMotor(1, 255, PWM_LB, IN1_LB, IN2_LB);
 }   
 
@@ -343,42 +345,42 @@ void left(){
 } 
 
 void turnRight(){
-  servo_RF.write(60 + RF_ofst);
+  servo_RF.write(45 + RF_ofst);
   servo_RM.write(start_angle + RM_ofst);
-  servo_RB.write(120 + RB_ofst);
+  servo_RB.write(135 + RB_ofst);
 
-  servo_LF.write(120 + LF_ofst);
+  servo_LF.write(135 + LF_ofst);
   servo_LM.write(start_angle + LM_ofst);
-  servo_LB.write(60 + LB_ofst);
+  servo_LB.write(45 + LB_ofst);
 
   delay(1000);
 
   setMotor(1, 200, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
   setMotor(1, 200, PWM_RB, IN1_RB, IN2_RB);
 
   setMotor(-1, 200, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
   setMotor(-1, 200, PWM_LB, IN1_LB, IN2_LB);
 }
 
 void turnLeft(){
-  servo_RF.write(60 + RF_ofst);
+  servo_RF.write(45 + RF_ofst);
   servo_RM.write(start_angle + RM_ofst);
-  servo_RB.write(120 + RB_ofst);
+  servo_RB.write(135 + RB_ofst);
 
-  servo_LF.write(120 + LF_ofst);
+  servo_LF.write(135 + LF_ofst);
   servo_LM.write(start_angle + LM_ofst);
-  servo_LB.write(60 + LB_ofst);
+  servo_LB.write(45 + LB_ofst);
 
   delay(1000);
 
   setMotor(-1, 200, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
   setMotor(-1, 200, PWM_RB, IN1_RB, IN2_RB);
 
   setMotor(1, 200, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
   setMotor(1, 200, PWM_LB, IN1_LB, IN2_LB);
 }
 
@@ -408,46 +410,46 @@ void smallLeft(){
 
 void calibrate(){
   setMotor(1, 200, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
   setMotor(1, 200, PWM_RB, IN1_RB, IN2_RB);
   setMotor(1, 200, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
   setMotor(1, 200, PWM_LB, IN1_LB, IN2_LB);
 
   delay(400);
 
   setMotor(-1, 200, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
   setMotor(-1, 200, PWM_RB, IN1_RB, IN2_RB);
   setMotor(-1, 200, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
   setMotor(-1, 200, PWM_LB, IN1_LB, IN2_LB);
 
   delay(400);
 
   setMotor(1, 200, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(1, 200, PWM_RM, IN1_RM, IN2_RM);
   setMotor(1, 200, PWM_RB, IN1_RB, IN2_RB);
   setMotor(1, 200, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(1, 200, PWM_LM, IN1_LM, IN2_LM);
   setMotor(1, 200, PWM_LB, IN1_LB, IN2_LB);
 
   delay(400);
 
   setMotor(-1, 200, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(-1, 200, PWM_RM, IN1_RM, IN2_RM);
   setMotor(-1, 200, PWM_RB, IN1_RB, IN2_RB);
   setMotor(-1, 200, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(-1, 200, PWM_LM, IN1_LM, IN2_LM);
   setMotor(-1, 200, PWM_LB, IN1_LB, IN2_LB);
 
   delay(400);
 
   setMotor(0, 0, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(0, 0, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(0, 0, PWM_RM, IN1_RM, IN2_RM);
   setMotor(0, 0, PWM_RB, IN1_RB, IN2_RB);
   setMotor(0, 0, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(0, 0, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(0, 0, PWM_LM, IN1_LM, IN2_LM);
   setMotor(0, 0, PWM_LB, IN1_LB, IN2_LB); 
 }
 
@@ -463,11 +465,11 @@ void slide(){
 
 void stopMotor() {
   setMotor(0, 0, PWM_RF, IN1_RF, IN2_RF);
-  setMotor(0, 0, PWM_RM, IN1_RM, IN2_RM);
+  // setMotor(0, 0, PWM_RM, IN1_RM, IN2_RM);
   setMotor(0, 0, PWM_RB, IN1_RB, IN2_RB);
 
   setMotor(0, 0, PWM_LF, IN1_LF, IN2_LF);
-  setMotor(0, 0, PWM_LM, IN1_LM, IN2_LM);
+  // setMotor(0, 0, PWM_LM, IN1_LM, IN2_LM);
   setMotor(0, 0, PWM_LB, IN1_LB, IN2_LB);
 }
 
@@ -492,14 +494,14 @@ void setMotor(int dir, int pwmVal, int pwm, int in1, int in2){
 void camUp(){
   float l = camL.read();
   float h = camH.read();
-  camL.write(min(160, l + 15));
-  camL.write(min(160, h + 15));
+  camL.write(min(160, l + 12));
+  camH.write(min(160, h + 20));
 }
 
 void camDown(){
   float l = camL.read();
   float h = camH.read();
-  camL.write(max(0, l - 15));
-  camL.write(max(0, h - 15));
+  camL.write(max(0, l - 12));
+  camH.write(max(0, h - 20));
 }
 

@@ -518,8 +518,8 @@
                 </div>
             </div>
             <div class="camera-mode">
-                <button id="camera-self-stabilize" class="active">Self Stabilize</button>
-                <button id="camera-manual">Manual</button>
+                <button id="camera-self-stabilize" class="active" onclick="sendCommand('b'); return false;" ontouchstart="">Self Stabilize</button>
+                <button id="camera-manual" onclick="sendCommand('n'); return false;" ontouchstart="">Manual</button>
             </div>
             <div id="camera-setting" style="display:none">
                 <div class="camera-lift-container">
